@@ -1,224 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Rashi ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Rashi ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        text-align: center;
-        color: white;
-        overflow-x: hidden;
-    }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffc0cb;
+            /* Romantic Background Image */
+            background-image: url("https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+        }
 
-    .overlay {
-        background: rgba(0, 0, 0, 0.55);
-        min-height: 100vh;
-        padding-bottom: 80px;
-    }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            z-index: 10;
+        }
 
-    .proposal-row {
-        margin-top: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-image: url('https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 20px;
+            border: 4px solid #ff4b5c;
+        }
 
-    .proposal-emoji {
-        font-size: 3.8rem;
-        animation: glow 2s infinite;
-    }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff4b5c;
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
 
-    .girl-gif {
-        width: 90px;
-        border-radius: 50%;
-        box-shadow: 0 0 20px pink;
-    }
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
 
-    @keyframes glow {
-        0% { text-shadow: 0 0 10px pink; }
-        50% { text-shadow: 0 0 25px hotpink; }
-        100% { text-shadow: 0 0 10px pink; }
-    }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            height: 50px; /* Keeps space stable */
+        }
 
-    h1 {
-        margin-top: 20px;
-        font-size: 3.2em;
-        text-shadow: 0 0 15px pink;
-    }
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
 
-    p {
-        font-size: 1.4em;
-    }
+        .yes-btn {
+            background-color: #ff4b5c;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 92, 0.4);
+            z-index: 20; /* Ensure Yes is always clickable */
+        }
 
-    .buttons {
-        margin-top: 60px;
-        position: relative;
-        height: 160px;
-    }
+        .yes-btn:hover {
+            transform: scale(1.1);
+        }
 
-    button {
-        font-size: 1.3em;
-        padding: 16px 40px;
-        border: none;
-        border-radius: 40px;
-        cursor: pointer;
-        position: absolute;
-    }
+        .no-btn {
+            background-color: #e0e0e0;
+            color: #333;
+            /* Absolute/Fixed will be applied by JS */
+        }
 
-    .yes {
-        background: #ff4b5c;
-        color: white;
-        left: 50%;
-        transform: translateX(-130%);
-        box-shadow: 0 0 25px pink;
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 10px pink; }
-        50% { box-shadow: 0 0 35px hotpink; }
-        100% { box-shadow: 0 0 10px pink; }
-    }
-
-    .no {
-        background: #777;
-        color: white;
-        left: 50%;
-        transform: translateX(30%);
-    }
-
-    #celebration {
-        display: none;
-        margin-top: 50px;
-    }
-
-    .canopy {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 120px;
-        background: repeating-linear-gradient(
-            45deg,
-            #ff4b5c,
-            #ff4b5c 20px,
-            #fff 20px,
-            #fff 40px
-        );
-        z-index: 10;
-    }
-
-    .balloon {
-        position: fixed;
-        bottom: -100px;
-        width: 60px;
-        height: 80px;
-        border-radius: 50%;
-        animation: floatUp 6s linear infinite;
-    }
-
-    .balloon::after {
-        content: '';
-        position: absolute;
-        width: 2px;
-        height: 50px;
-        background: white;
-        top: 80px;
-        left: 29px;
-    }
-
-    @keyframes floatUp {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-120vh); opacity: 0; }
-    }
-
-    .heart {
-        position: fixed;
-        font-size: 26px;
-        animation: heartFloat 4s linear infinite;
-    }
-
-    @keyframes heartFloat {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-100vh); opacity: 0; }
-    }
-</style>
+        /* Success Message */
+        #successSection {
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
 
-<audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b35a1e9d3.mp3">
-</audio>
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_24921c56b5.mp3?filename=romantic-piano-11006.mp3" type="audio/mp3">
+    </audio>
 
-<div class="overlay">
+    <div class="card">
+        <div id="questionSection">
+            <div class="profile-pic"></div>
+            <h1>Rashi ❤️</h1>
+            <p>Will you be my Valentine? 🌹</p>
+            
+            <div class="btn-container">
+                <button class="yes-btn" onclick="acceptProposal()">YES! 😍</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No 🙈</button>
+            </div>
+        </div>
 
-<!-- Proposal Scene -->
-<div class="proposal-row">
-    <div class="proposal-emoji">🧎‍♂️ ➡️ 💍 ❤️</div>
+        <div id="successSection">
+            <h1 style="font-size: 2.5rem; margin-top: 10px;">YAYYY! 🎉</h1>
+            <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" style="width: 100%; border-radius: 15px; margin: 15px 0;">
+            <p>See you soon! ❤️</p>
+        </div>
+    </div>
 
-    <!-- Girl GIF (after heart) -->
-    <img class="girl-gif"
-         src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-         alt="Girl blushing gif">
-</div>
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const questionSection = document.getElementById('questionSection');
+        const successSection = document.getElementById('successSection');
+        const music = document.getElementById('bgMusic');
 
-<h1>Rashi ❤️</h1>
-<p>Down on one knee, facing you, with all my heart…</p>
-<p>Will you be my Valentine? 💕</p>
+        const taunts = [
+            "No 🙈", 
+            "Are you sure? 🥺", 
+            "Really? 💔", 
+            "Think again! 🤔", 
+            "Last chance! 😅", 
+            "Don't do this! 😭",
+            "Try the other button! 👉"
+        ];
 
-<div class="buttons">
-    <button class="yes" onclick="sayYes()">Yes 💖</button>
-    <button class="no" id="noBtn" onclick="moveNo()">No 🙈</button>
-</div>
+        function moveButton() {
+            // 1. Calculate random position within screen bounds
+            // Subtract button width/height to keep it fully visible
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
 
-<div id="celebration">
-    <div class="canopy"></div>
-    <h1>I already knew it 😍</h1>
-    <p>This is the beginning of our forever 💞</p>
-</div>
+            // 2. Apply "Fixed" position so it can escape the card
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
 
-</div>
+            // 3. Change text randomly to be funny
+            const randomText = taunts[Math.floor(Math.random() * taunts.length)];
+            noBtn.innerText = randomText;
+        }
 
-<script>
-function moveNo() {
-    const noBtn = document.getElementById("noBtn");
-    noBtn.style.left = Math.random() * 70 + "%";
-    noBtn.style.top = Math.random() * 70 + "px";
-}
-
-function sayYes() {
-    document.getElementById("celebration").style.display = "block";
-
-    for (let i = 0; i < 30; i++) {
-        let balloon = document.createElement("div");
-        balloon.className = "balloon";
-        balloon.style.left = Math.random() * 100 + "vw";
-        balloon.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-        balloon.style.animationDuration = (4 + Math.random() * 4) + "s";
-        document.body.appendChild(balloon);
-        setTimeout(() => balloon.remove(), 7000);
-    }
-
-    setInterval(() => {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.bottom = "0px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-    }, 350);
-}
-</script>
+        function acceptProposal() {
+            music.play().catch(e => console.log("Music needs interaction"));
+            questionSection.style.display = 'none';
+            successSection.style.display = 'block';
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4b5c', '#ff9068', '#fff'] });
+        }
+    </script>
 
 </body>
 </html>
