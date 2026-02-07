@@ -23,8 +23,34 @@
         padding-bottom: 80px;
     }
 
+    .proposal-row {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .proposal-emoji {
+        font-size: 3.8rem;
+        animation: glow 2s infinite;
+    }
+
+    .girl-gif {
+        width: 90px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px pink;
+    }
+
+    @keyframes glow {
+        0% { text-shadow: 0 0 10px pink; }
+        50% { text-shadow: 0 0 25px hotpink; }
+        100% { text-shadow: 0 0 10px pink; }
+    }
+
     h1 {
-        padding-top: 50px;
+        margin-top: 20px;
         font-size: 3.2em;
         text-shadow: 0 0 15px pink;
     }
@@ -46,7 +72,6 @@
         border-radius: 40px;
         cursor: pointer;
         position: absolute;
-        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .yes {
@@ -130,15 +155,24 @@
 
 <body>
 
-<!-- Romantic Music -->
 <audio autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b35a1e9d3.mp3">
 </audio>
 
 <div class="overlay">
 
+<!-- Proposal Scene -->
+<div class="proposal-row">
+    <div class="proposal-emoji">🧎‍♂️ ➡️ 💍 ❤️</div>
+
+    <!-- Girl GIF (after heart) -->
+    <img class="girl-gif"
+         src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+         alt="Girl blushing gif">
+</div>
+
 <h1>Rashi ❤️</h1>
-<p>Under a Bali sunset, my heart chose you.</p>
+<p>Down on one knee, facing you, with all my heart…</p>
 <p>Will you be my Valentine? 💕</p>
 
 <div class="buttons">
@@ -164,7 +198,6 @@ function moveNo() {
 function sayYes() {
     document.getElementById("celebration").style.display = "block";
 
-    // Balloons
     for (let i = 0; i < 30; i++) {
         let balloon = document.createElement("div");
         balloon.className = "balloon";
@@ -175,7 +208,6 @@ function sayYes() {
         setTimeout(() => balloon.remove(), 7000);
     }
 
-    // Floating hearts
     setInterval(() => {
         let heart = document.createElement("div");
         heart.className = "heart";
